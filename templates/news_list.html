@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>News</title>
+</head>
+<body>
+    <table class="table">
+      <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">field2</th>
+            <th scope="col">field3</th>
+            <th scope="col">field4</th>
+            <th scope="col">field5</th>
+            <th scope="col">field6</th>
+            <th scope="col">field7</th>
+            <th scope="col">field8</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for new in news %}
+            <tr>
+                    <td scope="row">{{ new.id }}</td>
+                    <td>{{ new.field2 }}</td>
+                    <td>{{ new.field3 }}</td>
+                    <td>{{ new.field4 }}</td>
+                    <td>{{ new.field5 }}</td>
+                    <td>{{ new.field6 }}</td>
+                    <td>{{ new.field7 }}</td>
+                    <td>{{ new.field8 }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</body>
+</html>
