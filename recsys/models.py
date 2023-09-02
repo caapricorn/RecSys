@@ -16,6 +16,14 @@ class News(models.Model):
         db_table = "News"
 
 
+class Top_news(models.Model):
+    id = models.CharField(max_length=10, primary_key=True)
+    CountOfClicks = models.IntegerField()
+
+    class Meta:
+        db_table = "Top_news"
+
+
 class Behaviors(models.Model):
     id = models.CharField(max_length=50, primary_key=True)
     field2 = models.CharField(max_length=50)

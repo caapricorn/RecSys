@@ -56,10 +56,10 @@
 
                 <div class="col-md-6 mb-4">
                     <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day</span>
-                        {% with news|first as new %}
+                        {% with top|first as new %}
                             <h4><strong>{{new.Title}}</strong></h4>
                             <p class="text-muted">
-                                {{new.Abstract}}
+                                {{new.id}}
                             </p>
                         {% endwith %}
                     <button type="button" class="btn btn-primary">Read more</button>
