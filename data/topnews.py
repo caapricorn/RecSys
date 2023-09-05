@@ -15,11 +15,6 @@ def topnews():
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
 
-        # raw_behaviour = pd.read_csv(
-        #     "C:/Users/sasho/OneDrive/Рабочий стол/prog/recomend/RecSys/mind-news-dataset/MINDsmall_train/behaviors.tsv",
-        #     sep="\t",
-        #     names=["impressionId", "userId", "timestamp", "click_history", "impressions"])
-
         raw_behaviour = pd.DataFrame({'History': records})
 
         # clicks to rating news
@@ -36,14 +31,24 @@ def topnews():
                 cl2rat.append(item)
 
         # top popular news
-        cl2rat = list(Counter(cl2rat).items())
+        cl2rat = list(Counter(cl2rat).most_common())
 
-        for mydict in cl2rat:
-            values = "'" + mydict[0] + "', " + str(mydict[1])
-            sqlite_select_query = """INSERT INTO %s ( %s ) VALUES ( %s );""" % ('Top_news', 'id, CountOfClicks', values)
-            print(sqlite_select_query)
+
+        # index = 1
+        # for mydict in cl2rat:
+        #     values = str(index) + ", '" + mydict[0] + "', " + str(mydict[1])
+        #     sqlite_select_query = """INSERT INTO %s ( %s ) VALUES ( %s );""" % ('Top_news', 'id, NewsId, CountOfClicks', values)
+        #     cursor.execute(sqlite_select_query)
+        #     index += 1
+        #     sqlite_connection.commit()
+
+        index = 1
+        for mydict in cl2rat[:16]:
+            values = str(index) + ", (SELECT Category FROM News WHERE id='" + mydict[0] + "')" + ", (SELECT Title FROM News WHERE id='" + mydict[0] + "')"  + ", (SELECT Abstract FROM News WHERE id='" + mydict[0] + "')"
+            sqlite_select_query = """INSERT INTO %s ( %s ) VALUES ( %s );""" % ('Main_news', 'id, Category, Title, Abstract', values)
             cursor.execute(sqlite_select_query)
-            #sqlite_connection.commit()
+            index += 1
+            sqlite_connection.commit()
 
         cursor.close()
 

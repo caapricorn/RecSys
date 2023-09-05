@@ -17,11 +17,22 @@ class News(models.Model):
 
 
 class Top_news(models.Model):
-    id = models.CharField(max_length=10, primary_key=True)
+    id = models.IntegerField(max_length=10, primary_key=True)
+    NewsId = models.CharField(max_length=10)
     CountOfClicks = models.IntegerField()
 
     class Meta:
         db_table = "Top_news"
+
+
+class Main_news(models.Model):
+    id = models.IntegerField(max_length=10, primary_key=True)
+    Category = models.CharField(max_length=50)
+    Title = models.CharField(max_length=100)
+    Abstract = models.CharField(max_length=1000)
+
+    class Meta:
+        db_table = "Main_news"
 
 
 class Behaviors(models.Model):
