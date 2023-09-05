@@ -20,5 +20,7 @@ from recsys import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', views.news_list)
+    path('', views.news_list),
+    path('articles', views.news_list),
+    path('articles/<str:id>/', views.news_one)
 ]

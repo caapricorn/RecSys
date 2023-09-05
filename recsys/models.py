@@ -27,6 +27,7 @@ class Top_news(models.Model):
 
 class Main_news(models.Model):
     id = models.IntegerField(max_length=10, primary_key=True)
+    NewsId = models.CharField(max_length=50)
     Category = models.CharField(max_length=50)
     Title = models.CharField(max_length=100)
     Abstract = models.CharField(max_length=1000)

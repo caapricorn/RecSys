@@ -44,8 +44,8 @@ def topnews():
 
         index = 1
         for mydict in cl2rat[:16]:
-            values = str(index) + ", (SELECT Category FROM News WHERE id='" + mydict[0] + "')" + ", (SELECT Title FROM News WHERE id='" + mydict[0] + "')"  + ", (SELECT Abstract FROM News WHERE id='" + mydict[0] + "')"
-            sqlite_select_query = """INSERT INTO %s ( %s ) VALUES ( %s );""" % ('Main_news', 'id, Category, Title, Abstract', values)
+            values = str(index) + ", (SELECT Category FROM News WHERE id='" + mydict[0] + "')" + ", (SELECT Title FROM News WHERE id='" + mydict[0] + "')" + ", (SELECT Abstract FROM News WHERE id='" + mydict[0] + "')" + ", '" + mydict[0] + "'"
+            sqlite_select_query = """INSERT INTO %s ( %s ) VALUES ( %s );""" % ('Main_news', 'id, Category, Title, Abstract, NewsId', values)
             cursor.execute(sqlite_select_query)
             index += 1
             sqlite_connection.commit()
