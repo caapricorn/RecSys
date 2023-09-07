@@ -3,13 +3,12 @@ import sqlite3
 import pandas as pd
 
 from collections import Counter
-from v1.recsystem.settings import BASE_DIR
+from recsystem.settings import BASE_DIR
 
 a = 45
 
 # Index click history field
 def corr():
-
     try:
         sqlite_connection = sqlite3.connect(os.path.join(BASE_DIR, 'recsys.sqlite3'))
         cursor = sqlite_connection.cursor()
