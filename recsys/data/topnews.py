@@ -64,23 +64,23 @@ def topnews():
             sqlite_connection.close()
 
 
-def list_of_pop(category):
+def list_of_pop(categories, main_cat):
     try:
         sqlite_connection = sqlite3.connect(os.path.join(BASE_DIR, 'recsys.sqlite3'))
         cursor = sqlite_connection.cursor()
 
         value = ''
-        for cat in category:
+        for cat in categories:
             value = value + "'" + cat + "'" + ', '
+        value = value + "'" + main_cat + "'"
 
-        sqlite_select_query = """SELECT * from Top_news WHERE Category IN ( %s )""" % value[:-2]
-        print(sqlite_select_query)
+        sqlite_select_query = """SELECT * from Top_news WHERE Category IN ( %s )""" % value
         query = cursor.execute(sqlite_select_query)
         cols = [column[0] for column in query.description]
         personal_pop = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
 
         cursor.close()
-        return personal_pop.head(10)
+        return personal_pop[:10]
     except sqlite3.Error as error:
         print("Error while working with SQLite", error)
     finally:
