@@ -10,5 +10,6 @@ def news_list(request):
 
 def news_one(request, id):
     article = News.objects.get(id=id)
-    similarity.similar(id)
-    return render(request, 'news_one.html', {'article':  article})
+    similar = similarity.similar(id)
+
+    return render(request, 'news_one.html', {'article':  article, 'similar': similar.iloc})

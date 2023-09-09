@@ -66,14 +66,12 @@ def cos_top(top_of_pop_similar, id):
         query = cursor.execute(sqlite_select_query)
         cols = [column[0] for column in query.description]
         news = pd.DataFrame.from_records(data=query.fetchall(), columns=cols)
-        print(news)
 
         value = "'" + id + "'"
 
         sqlite_select_query = """SELECT Title from News WHERE id IN ( %s )""" % value
         query = cursor.execute(sqlite_select_query)
         news.loc[len(news.index)] = query.fetchone()
-        print(news)
 
         cursor.close()
 
@@ -107,5 +105,15 @@ def cos_top(top_of_pop_similar, id):
     sentence_vectors = vectorizer.fit_transform(corpus_new)
     cosine_similarities = cosine_similarity(sentence_vectors, sentence_vectors[-1])
     print(cosine_similarities)
+    x = 0
+    index = []
+    for article in cosine_similarities:
+        if (article[0]) > 0.001 and (1.0 - article[0]) > 0.001:
+            index.append(top_of_pop_similar.iloc[x]["NewsId"])
+        x += 1
+    if not index:
+        for i in range(3):
+            index.append(top_of_pop_similar.iloc[i]["NewsId"])
+    return index
 
 cos()
