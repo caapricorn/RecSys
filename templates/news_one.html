@@ -24,6 +24,11 @@
             position: relative;
             top: 50px
         }
+        .brend {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 <body>
@@ -46,6 +51,9 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between align-center w-100">
                         <li class="nav-item">
                             <a class="nav-link">The data is up-to-date by <span style="color: #ff7eb2">{% now "jS F Y H:i" %}</span></a>
+                        </li>
+                                                <li class="nav-item brend">
+                            <h2>Agenda</h2>
                         </li>
                                                 <li class="nav-item" >
                             <a class="nav-link" href="/">Main Page</a>
@@ -93,7 +101,7 @@
             <div class="container py-5">
                 <div class="row">
                     <div class="col text-center h2 text-info">
-                        РАЗРАБОТАЛА САШКА ПАСТУХОВА
+                        <p>&copy; {{ current_year }} News Site. All rights reserved.</p>
                     </div>
                 </div>
             </div>
